@@ -44,19 +44,56 @@ export function CreateRoom2(): void {
     //Abrir a porta apertando o botão
     button.addComponent(
         new OnPointerDown((): void => {
-            button
-                .getComponent(Animator)
-                .getClip("Button_Action")
-                .play();
+            //Aqui vê se o tempo tá rodando
+            if (!countdownText.hasComponent(utils.Interval)) {
 
-            button.getComponent(AudioSource).playOnce();
+                button
+                    .getComponent(Animator)
+                    .getClip("Button_Action")
+                    .stop();
+                button
+                    .getComponent(Animator)
+                    .getClip("Button_Action")
+                    .play();
+                button.getComponent(AudioSource).playOnce();
 
-            door
-                .getComponent(Animator)
-                .getClip("Door_Open")
-                .play();
+                door
+                    .getComponent(Animator)
+                    .getClip("Door_Close")
+                    .stop();
+                door
+                    .getComponent(Animator)
+                    .getClip("Door_Open")
+                    .play();
+                door.getComponent(AudioSource).playOnce();
 
-            door.getComponent(AudioSource).playOnce();
+                let timeRemaining = 5;
+                countdownText.addComponent(
+                    new utils.Interval(1000, (): void => {
+                        //passou 1 segundo (passou?)
+                        timeRemaining--;
+
+                        if (timeRemaining > 0) {
+                            countdownText.getComponent(TextShape).value = formatTimeString(timeRemaining);
+                        } else {
+                            // Se o tempo chegou a 0, remove o intervalo pra não ter tempo negativo
+                            countdownText.removeComponent(utils.Interval);
+
+                            door
+                                .getComponent(Animator)
+                                .getClip("Door_Open")
+                                .stop();
+                            door
+                                .getComponent(Animator)
+                                .getClip("Door_Close")
+                                .play();
+                            door.getComponent(AudioSource).playOnce();
+
+                            countdownText.getComponent(TextShape).value = formatTimeString(5);
+                        }
+                    })
+                );
+            }
         })
     );
 
@@ -89,31 +126,5 @@ export function CreateRoom2(): void {
     }
 
     countdownText.addComponent(new TextShape(formatTimeString(5)));
-
-
-    let timeRemaining = 5;
-    countdownText.addComponent(
-        new utils.Interval(1000, (): void => {
-            //passou 1 segundo (passou?)
-            timeRemaining--;
-
-            if (timeRemaining > 0) {
-                countdownText.getComponent(TextShape).value = formatTimeString(timeRemaining);
-            } else {
-                // Se o tempo chegou a 0, remove o intervalo pra não ter tempo negativo
-                countdownText.removeComponent(utils.Interval);
-
-                // Fecha a porta
-                door
-                    .getComponent(Animator)
-                    .getClip("Door_Close")
-                    .play();
-
-                door.getComponent(AudioSource).playOnce();
-
-                countdownText.getComponent(TextShape).value = formatTimeString(5);
-            }
-        })
-    );
 
 }
