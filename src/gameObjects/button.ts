@@ -1,0 +1,30 @@
+export class Button extends Entity {
+    // The shape and position may differ
+    constructor(
+        model: GLTFShape,
+        transform: TransformConstructorArgs
+    ) {
+        super();
+        engine.addEntity(this);
+
+        this.addComponent(model);
+        this.addComponent(new Transform(transform));
+
+        this.addComponent(new AudioSource(new AudioClip("sounds/button.mp3")));
+
+        this.addComponent(new Animator());
+        this.getComponent(Animator).addClip(
+            new AnimationState("Button_Action", { looping: false })
+        );
+    }
+
+    public press(): void {
+        this.getComponent(Animator)
+            .getClip("Button_Action")
+            .stop(); // bug workaround
+        this.getComponent(Animator)
+            .getClip("Button_Action")
+            .play();
+        this.getComponent(AudioSource).playOnce();
+    }
+}
