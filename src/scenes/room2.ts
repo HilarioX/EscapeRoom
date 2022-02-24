@@ -1,7 +1,5 @@
 import utils from '../../node_modules/decentraland-ecs-utils/index';
-import { Door } from '../gameObjects/door';
-import { Button } from '../gameObjects/button';
-import { Timer } from '../gameObjects/timer';
+import { Door, Button, Timer } from '../gameObjects/index';
 
 export function CreateRoom2(): void {
 
@@ -10,7 +8,7 @@ export function CreateRoom2(): void {
         {
             position: new Vector3(24.1, 5.51634, 24.9)
         },
-        new AudioClip("sounds.door_squeak.mp3")
+        new AudioClip("sounds/door_squeak.mp3")
     );
 
     const countdownClock = new Timer({
