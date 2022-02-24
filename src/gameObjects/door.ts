@@ -1,6 +1,6 @@
 export class Door extends Entity {
 
-    public isOpen: boolean;
+    public isOpen: boolean | undefined;
 
     constructor(
         model: GLTFShape,
