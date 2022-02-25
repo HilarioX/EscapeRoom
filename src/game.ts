@@ -1,10 +1,9 @@
-import { BaseScene } from "./gameObjects/index";
-import { CreateRoom1 } from "./scenes/room1";
-import { CreateRoom2 } from "./scenes/room2";
-import { CreateRoom3 } from "./scenes/room3";
+import gameObjects from "./gameObjects/index";
+import scenes from "./scenes/index";
 
-new BaseScene();
+new gameObjects.BaseScene();
 
-CreateRoom1();
-CreateRoom2();
-CreateRoom3();
+scenes.CreateRoom1();
+scenes.CreateRoom2();
+scenes.CreateRoom3();
+scenes.CreateRoom4();

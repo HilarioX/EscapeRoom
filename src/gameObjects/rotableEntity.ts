@@ -1,13 +1,12 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
-export class MovableEntity extends Entity {
+export class RotableEntity extends Entity {
 
     constructor(
         model: GLTFShape,
         transform: TransformConstructorArgs,
         sound: AudioClip,
-        deltaPosition: Vector3,
-        moveTime = 0.5
+        rotation: Quaternion
     ) {
         super();
         engine.addEntity(this);
@@ -16,26 +15,26 @@ export class MovableEntity extends Entity {
         this.addComponent(new Transform(transform));
         this.addComponent(new AudioSource(sound));
 
-        const startPos = transform.position;
-        const endPos = transform.position.add(deltaPosition);
+        const startRot = transform.rotation;
+        const endRot = rotation;
 
         this.addComponent(
             new utils.ToggleComponent(utils.ToggleState.Off, (value): void => {
-                if (value === utils.ToggleState.On) {
+                if (value == utils.ToggleState.On) {
                     this.addComponentOrReplace(
-                        new utils.MoveTransformComponent(
-                            this.getComponent(Transform).position,
-                            endPos,
-                            moveTime
+                        new utils.RotateTransformComponent(
+                            this.getComponent(Transform).rotation,
+                            endRot,
+                            0.5
                         )
                     );
                 }
                 else {
                     this.addComponentOrReplace(
-                        new utils.MoveTransformComponent(
-                            this.getComponent(Transform).position,
-                            startPos,
-                            moveTime
+                        new utils.RotateTransformComponent(
+                            this.getComponent(Transform).rotation,
+                            startRot,
+                            0.5,
                         )
                     );
                 }

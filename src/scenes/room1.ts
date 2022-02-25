@@ -1,10 +1,12 @@
-import { Door } from "../gameObjects/index";
+import gameObjects from "../gameObjects/index";
+import resources from "../resources";
+
 export function CreateRoom1(): void {
 
-    const door = new Door(
-        new GLTFShape("models/room1/Puzzle01_Door.glb"),
+    const door = new gameObjects.Door(
+        resources.models.door1,
         { position: new Vector3(21.18, 10.9, 24.5) },
-        new AudioClip("sounds/door_squeak.mp3")
+        resources.sounds.doorSqueak
     );
 
     let isDoorOpen = false;

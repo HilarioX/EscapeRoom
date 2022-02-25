@@ -1,25 +1,26 @@
 import utils from '../../node_modules/decentraland-ecs-utils/index';
-import { Door, Button, Timer } from '../gameObjects/index';
+import gameObjects from '../gameObjects/index';
+import resources from '../resources';
 
 export function CreateRoom2(): void {
 
-    const door = new Door(
-        new GLTFShape("models/room2/Puzzle02_Door.glb"),
+    const door = new gameObjects.Door(
+        resources.models.door2,
         {
             position: new Vector3(24.1, 5.51634, 24.9)
         },
-        new AudioClip("sounds/door_squeak.mp3")
+        resources.sounds.doorSqueak
     );
 
-    const countdownClock = new Timer({
+    const countdownClock = new gameObjects.Timer({
         position: new Vector3(25.1272, 9.51119, 25.2116),
         rotation: Quaternion.Euler(20, 180, 0)
     });
 
     countdownClock.updateTimestring(5);
 
-    const button = new Button(
-        new GLTFShape("models/room2/Square_Button.glb"),
+    const button = new gameObjects.Button(
+        resources.models.squareButton,
         {
             position: new Vector3(26.3714, 6.89, 26.8936)
         }

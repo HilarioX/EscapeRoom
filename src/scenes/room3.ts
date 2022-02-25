@@ -1,12 +1,13 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
-import { Door, Button, MovableEntity } from "../gameObjects/index";
+import gameObjects from "../gameObjects/index";
+import resources from "../resources";
 
 export function CreateRoom3(): void {
 
-    const door = new Door(
-        new GLTFShape("models/room3/Puzzle03_Door.glb"),
+    const door = new gameObjects.Door(
+        resources.models.door3,
         { position: new Vector3(24.11166, 7.17, 15.78) },
-        new AudioClip("sounds/room3/whip.mp3")
+        resources.sounds.whip
     );
     door.isOpen = true;
     door.closeDoor();
@@ -22,8 +23,8 @@ export function CreateRoom3(): void {
     ));
 
 
-    const button = new Button(
-        new GLTFShape("models/generic/Round_Button.glb"),
+    const button = new gameObjects.Button(
+        resources.models.roundButton,
         { position: new Vector3(22.4456, 5.92706, 24.17) },
     );
 
@@ -35,10 +36,10 @@ export function CreateRoom3(): void {
     }));
 
     //codigo para inserir uma planta
-    const fern1 = new MovableEntity(
-        new GLTFShape("models/room3/Puzzle03_plant1.glb"),
+    const fern1 = new gameObjects.MovableEntity(
+        resources.models.plant1,
         { position: new Vector3(23.2489, 5.5071, 23.813) },
-        new AudioClip("sounds/move_object1.mp3"),
+        resources.sounds.moveObject1,
         new Vector3(0, 0, -0.5)
     );
 
@@ -49,10 +50,10 @@ export function CreateRoom3(): void {
         })
     );
 
-    const fern2 = new MovableEntity(
-        new GLTFShape("models/room3/Puzzle03_plant1.glb"),
+    const fern2 = new gameObjects.MovableEntity(
+        resources.models.plant2,
         { position: new Vector3(26.9419, 5.52006, 23.4817) },
-        new AudioClip("sounds/move_object1.mp3"),
+        resources.sounds.moveObject1,
         new Vector3(0, 0, -0.5)
     );
 
@@ -62,10 +63,10 @@ export function CreateRoom3(): void {
         })
     );
 
-    const fern3 = new MovableEntity(
-        new GLTFShape("models/room3/Puzzle03_plant1.glb"),
+    const fern3 = new gameObjects.MovableEntity(
+        resources.models.plant3,
         { position: new Vector3(23.4513, 5.50571, 16.8218) },
-        new AudioClip("sounds/move_object1.mp3"),
+        resources.sounds.moveObject1,
         new Vector3(0, 0, -0.5)
     );
 
@@ -75,10 +76,10 @@ export function CreateRoom3(): void {
         })
     );
 
-    const fern4 = new MovableEntity(
-        new GLTFShape("models/room3/Puzzle03_plant1.glb"),
+    const fern4 = new gameObjects.MovableEntity(
+        resources.models.plant4,
         { position: new Vector3(26.9878, 5.51511, 16.8279) },
-        new AudioClip("sounds/move_object1.mp3"),
+        resources.sounds.moveObject1,
         new Vector3(0, 0, -0.5)
     );
 
