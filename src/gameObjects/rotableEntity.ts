@@ -1,11 +1,10 @@
 import utils from "../../node_modules/decentraland-ecs-utils/index";
 
-export class RotableEntity extends Entity {
-
+export class RotatableEntity extends Entity {
     constructor(
         model: GLTFShape,
-        transform: TransformConstructorArgs,
-        sound: AudioClip,
+        transform: TranformConstructorArgs,
+        audio: AudioClip,
         rotation: Quaternion
     ) {
         super();
@@ -13,14 +12,17 @@ export class RotableEntity extends Entity {
 
         this.addComponent(model);
         this.addComponent(new Transform(transform));
-        this.addComponent(new AudioSource(sound));
+        this.addComponent(new AudioSource(audio));
 
+        // Save the positions to move between
         const startRot = transform.rotation;
         const endRot = rotation;
 
+        // Add a Toggle component which defaults to Off
         this.addComponent(
             new utils.ToggleComponent(utils.ToggleState.Off, (value): void => {
                 if (value == utils.ToggleState.On) {
+                    // Rotate to the endRot when toggled on
                     this.addComponentOrReplace(
                         new utils.RotateTransformComponent(
                             this.getComponent(Transform).rotation,
@@ -28,17 +30,18 @@ export class RotableEntity extends Entity {
                             0.5
                         )
                     );
-                }
-                else {
+                } else {
+                    // Rotate to the startRot when toggled on
                     this.addComponentOrReplace(
                         new utils.RotateTransformComponent(
                             this.getComponent(Transform).rotation,
                             startRot,
-                            0.5,
+                            0.5
                         )
                     );
                 }
 
+                // Play the sound effect
                 this.getComponent(AudioSource).playOnce();
             })
         );

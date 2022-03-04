@@ -36,7 +36,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  const telescope = new gameObjects.RotableEntity(
+  const telescope = new gameObjects.RotatableEntity(
     resources.models.telescope,
     new Transform({ position: new Vector3(22.6554, 7.02615, 10.6208) }),
     resources.sounds.moveObject1,
@@ -48,7 +48,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  const globe = new gameObjects.RotableEntity(
+  const globe = new gameObjects.RotatableEntity(
     resources.models.globe,
     new Transform({
       position: new Vector3(21.2191, 7.11234, 10.6817),
@@ -64,7 +64,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  const rotableBook = new gameObjects.RotableEntity(
+  const rotableBook = new gameObjects.RotatableEntity(
     resources.models.book1,
     new Transform({ position: new Vector3(15.8321, 7.83095, 14.1252) }),
     resources.sounds.moveObject1,
@@ -77,7 +77,7 @@ export function CreateRoom4(): void {
     })
   );
 
-  const candleHolder = new gameObjects.RotableEntity(
+  const candleHolder = new gameObjects.RotatableEntity(
     resources.models.candleHolder,
     new Transform({ position: new Vector3(17.5056, 7.61611, 15.3835) }),
     resources.sounds.moveObject2,
